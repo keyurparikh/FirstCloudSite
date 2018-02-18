@@ -1,0 +1,21 @@
+<div *screenBelowLarge class="title-bar-small">
+    <span (click)="menuService.toggleLeftSideMenu()">
+      <span class="fas fa-align-justify fa-lg"></span>
+        </span>
+    <div class="small-image-holder">
+        <img class="small-image" src="assets/logo.png">
+    </div>
+    <span>
+    <span class="fas fa-ellipsis-v fa-fw"></span>
+  </span>
+</div>
+
+<div *screenLarge class="title-bar user-title-bar">
+    <img src="assets/logo.png" alt="Green Nations Logo">
+    <div class="menu-area" >
+        <fw-top-bar>
+        </fw-top-bar>
+      <fw-menu *ngIf="!menuService.isVertical">        
+      </fw-menu>
+    </div>
+</div>

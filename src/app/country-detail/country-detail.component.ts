@@ -2,7 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { ActivatedRoute, Params, Router} from '@angular/router';
 
 import { AppDataService } from '../services/app-data.service';
-import { Country } from '../view-models/Country';
+import { Country } from '../view-models/country';
 import { FieldDefinition } from '../../fw/dynamic-forms/field-definition';
 
 @Component({

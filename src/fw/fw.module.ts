@@ -21,7 +21,7 @@ import { RegisterUserComponent } from './users/register-user/register-user.compo
 import { DynamicFormComponent } from './dynamic-forms/dynamic-form/dynamic-form.component';
 import { DynamicFieldComponent } from './dynamic-forms/dynamic-field/dynamic-field.component';
 import { PanelComponent } from './panels/panel/panel.component';
-
+import { ConverToBold } from './pipes/convert-to-bold.pipe';
 
 @NgModule({
   imports: [
@@ -45,7 +45,8 @@ import { PanelComponent } from './panels/panel/panel.component';
     RegisterUserComponent,
     DynamicFormComponent,
     DynamicFieldComponent,
-    PanelComponent
+    PanelComponent,
+    ConverToBold
   ],
   providers: [
     FrameworkConfigService,
@@ -57,7 +58,8 @@ import { PanelComponent } from './panels/panel/panel.component';
     DynamicFormComponent,
     PanelComponent,
     ScreenLarge,
-    ScreenBelowLarge
+    ScreenBelowLarge,
+    ConverToBold
   ]
 })
 export class FwModule { }

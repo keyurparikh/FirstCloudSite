@@ -11,14 +11,27 @@ import { Country } from '../view-models/Country';
 })
 export class CountryMaintComponent {
 
+  filterCountries: Array<Country>;
   countries : Array<Country>;
   deleteError: string;
   deleteId: number;
   isDeleting = false;
+ 
+  _listFilter: string;
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value:string) {
+    this._listFilter = value;
+    this.filterCountries = this.listFilter ? this.performFilter(this.listFilter) : this.countries;
+  }
 
   constructor(private dataService: AppDataService,
               private router: Router) { 
     dataService.getCountries().subscribe((data) => this.countries = data);
+    this.filterCountries = this.countries;
+    this.listFilter = "Australia";
   }
 
   cancelDelete() {
@@ -49,6 +62,11 @@ export class CountryMaintComponent {
 
   showCountryDetail(id: number) {
     this.router.navigate(['/authenticated/country-detail', id, 'details']);
+  }
+
+  performFilter(filterBy: string): Array<Country> {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.countries.filter(t => t.name.toLocaleLowerCase().indexOf(filterBy) !== -1 );
   }
 
 }

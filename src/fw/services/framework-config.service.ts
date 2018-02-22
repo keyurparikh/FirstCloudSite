@@ -11,7 +11,9 @@ export interface FrameworkConfigSettings {
   showUserControls?: boolean,
   showStatusBar?: boolean,
   showStatusBarBreakpoint?: number,
-  socialIcons?: Array<IconFiles>
+  socialIcons?: Array<IconFiles>,
+  signInBGImageURL?: string,
+  signInLogoURL?: string
 }
 
 @Injectable()
@@ -22,6 +24,8 @@ export class FrameworkConfigService {
   showStatusBar = true;
   showStatusBarBreakpoint = 0;
   socialIcons = new Array<IconFiles>();
+  signInBGImageURL = "";
+  signInLogoURL = "";
 
   configure(settings: FrameworkConfigSettings) : void {
     Object.assign(this, settings);

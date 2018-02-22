@@ -1,6 +1,6 @@
 :host {
-    height: 30px;
-    text-align: right;
+    height: 30px; 
+    text-align: right; 
     padding-top: 4px;
     color: #888;
 }
@@ -25,10 +25,16 @@ a {
     width: 22px;
     height: 16px;
     vertical-align: middle;
-    /* margin-right: -16px; */
+    /*margin-right: -16px;*/
 }
 
 span.glyphicon {
     margin-left: 4px;
     font-size: 11px;
 }
+
+.sign-out {
+    margin-left: 12px;
+    cursor: pointer;
+}
+

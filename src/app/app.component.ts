@@ -21,7 +21,9 @@ export class AppComponent {
       showLanguageSelector: true,
       showUserControls: true,
       showStatusBar: true,
-      showStatusBarBreakpoint: 800
+      showStatusBarBreakpoint: 800,
+      signInBGImageURL: "../../../assets/mountains.jpg",
+      signInLogoURL: "./assets/logo.png"
     };
 
     frameworkConfigService.configure(config);

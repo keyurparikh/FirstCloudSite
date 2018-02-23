@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,8 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AppDataService } from './services/app-data.service';
 import { CountryPanelComponent } from './panels/country-panel/country-panel.component';
 import { ImagePanelComponent } from './panels/image-panel/image-panel.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
+import { Globals } from './services/global';
 
 @NgModule({
   declarations: [
@@ -30,12 +33,14 @@ import { ImagePanelComponent } from './panels/image-panel/image-panel.component'
     CountryMaintComponent,
     AuthenticatedUserComponent,
     CountryPanelComponent,
-    ImagePanelComponent
+    ImagePanelComponent,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     FwModule,
     RouterModule.forRoot(appRoutes)
   ],
@@ -43,7 +48,8 @@ import { ImagePanelComponent } from './panels/image-panel/image-panel.component'
     UserService,
     { provide: UserApi, useExisting: UserService },
     AuthGuard,
-    AppDataService
+    AppDataService,
+    Globals
   ],
   bootstrap: [AppComponent]
 })

@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { UserService } from './user.service';
 import { Country } from '../view-models/country';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/do';
+import { HttpErrorResponse } from '@angular/common/http/src/response';
+import { Globals } from './global';
 
 @Injectable()
 export class AppDataService {
+  private _countriesUrl = "/assets/country.json";
+  private countries : Array<Country>;
 
-  private countries : Array<Country> = [
-    { id: 1, name:"Switzerland",  epiIndex: 87.67 },
-    { id: 2, name:"Luxembourg",   epiIndex: 83.29 },
-    { id: 3, name:"Australia", epiIndex: 82.4 },
-    { id: 4, name:"Singapore", epiIndex: 81.78 },
-    { id: 5, name:"Czech Republic", epiIndex: 81.47 },
-    { id: 6, name:"Germany", epiIndex: 80.47 },
-    { id: 7, name:"Spain", epiIndex: 79.09 },
-    { id: 8, name:"Austria", epiIndex: 78.32 },
-    { id: 9, name:"Sweden", epiIndex: 78.09 },
-    { id: 10, name:"Norway", epiIndex: 78.04 }
-  ];
-
-  constructor(private userService: UserService) {
+  constructor(private _http: HttpClient, private userService: UserService, 
+    private global: Globals) {
   }
 
   createCountry(vm: Country) : Observable<any> {
@@ -38,20 +34,34 @@ export class AppDataService {
      .do(e => this.countries.splice(this.countries.findIndex(c => c.id == id), 1));
   }
 
-  getCountries() : Observable<any> {
-    return Observable.of(this.countries);
+  getCountries() : Observable<Country[]> {
+   // return Observable.of(this.countries);   
+    var countries =  this._http.get<Country[]>(this._countriesUrl)                
+                .catch(this.handleError);
+ 
+    return countries;
+  }
+
+  private handleError(err: HttpErrorResponse)
+  {
+      console.log(err.message);
+      return Observable.throw(err.message);
   }
 
   getCountry(id: number) : Observable<Country> {
+    this.countries = this.global.countriesList;
     var country = this.countries.find(c => c.id == id);
     return Observable.of(country);
   }
 
   updateCountry(updatedCountry: Country) : Observable<any> {
+   console.log("update: " + this.global.countriesList) ;
+   this.countries = this.global.countriesList;
     var country = this.countries.find(c => c.id == updatedCountry.id);
     Object.assign(country, updatedCountry);
     return Observable.of(country).delay(2000);
     //return Observable.of({}).delay(2000).flatMap(x=>Observable.throw(''));
+    
   }
   
 }
